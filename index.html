@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Africa map demo using jsVectorMap</title>
+  <link rel="stylesheet" href="jquery-jvectormap-2.0.5.css" type="text/css" media="screen"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="jquery-jvectormap-2.0.5.min.js"></script>
+
+  <script src="http://jvectormap.com/js/jquery-jvectormap-africa-mill.js"></script>
+</head>
+<body>
+  <div id="africa-map" style="width: 1000px; height: 800px"></div>
+  <script>
+    $(function(){
+      // if you want to choose another continent , see the link here: http://jvectormap.com/maps/world/ 
+      $('#africa-map').vectorMap({map: 'africa_mill'});
+    });
+
+// for more countries code in order to add them in the var gdpData , see the link here  :http://jvectormap.com/maps/world/africa/
+var gdpData = {
+  "ZA": 16.63,
+  "MA": 11.58,
+  "DZ": 158.97,
+  "LY": 454.45
+};
+
+    $('#africa-map').vectorMap({
+       backgroundColor:'#ed5555',
+  map: 'africa_mill',
+  series: {
+
+    regions: [{
+      values: gdpData,
+      scale: ['#5AAC4B'],
+      normalizeFunction: 'polynomial'
+    }]
+  },
+  onRegionTipShow: function(e, el, code){
+    // this message is showwing on the hover event .
+    el.html(el.html()+' (GDP - '+gdpData[code]+')');
+  }
+});
+  </script>
+</body>
+</html>
